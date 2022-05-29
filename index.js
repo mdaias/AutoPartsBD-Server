@@ -87,9 +87,12 @@ async function run() {
             res.send({ result, token });
           })
 
-
-
-
+           //Add a new parts
+        app.post('/parts', async (req, res) => {
+            const newService = req.body;
+            const result = await partsCollection.insertOne(newService);
+            res.send(result);
+        });
 
 
           app.get('/user', verifyJWT, async (req, res) => {
@@ -124,11 +127,17 @@ async function run() {
       
           })
 
-         
-
         
           
-        // DELETE
+        // DELETE Product
+        app.delete('/parts/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await partsCollection.deleteOne(query);
+            res.send(result);
+        });
+
+        // DELETE orders
         app.delete('/order/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
