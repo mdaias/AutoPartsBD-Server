@@ -39,8 +39,9 @@ async function run() {
         const partsCollection = client.db("AutoPartsBD").collection("parts");
         const orderCollection = client.db("AutoPartsBD").collection("order");
         const userCollection = client.db("AutoPartsBD").collection("user");
+        const reviewsCollection = client.db("AutoPartsBD").collection("reviews");
 
-        //Get all Product
+        //Load all Product
         app.get('/parts', async (req, res) => {
             const query = {};
             const cursor = partsCollection.find(query)
@@ -49,10 +50,19 @@ async function run() {
             res.send(result);
         });
 
-        //Get all order
-        app.get('orders', async (req,res) => {
+        //Load all order
+        app.get('/orders', async (req,res) => {
           const query = {};
           const cursor = orderCollection.find(query);
+          const result = await cursor.toArray()
+
+          res.send(result);
+        })
+
+        //Load all reviews
+        app.get('/reviews', async (req,res) => {
+          const query = {};
+          const cursor = reviewsCollection.find(query);
           const result = await cursor.toArray()
 
           res.send(result);
