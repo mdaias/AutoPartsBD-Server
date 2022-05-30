@@ -47,6 +47,15 @@ async function run() {
             const result = await cursor.toArray();
 
             res.send(result);
+        });
+
+        //Get all order
+        app.get('orders', async (req,res) => {
+          const query = {};
+          const cursor = orderCollection.find(query);
+          const result = await cursor.toArray()
+
+          res.send(result);
         })
 
         //Get Product by Id
