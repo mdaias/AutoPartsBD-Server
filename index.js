@@ -41,7 +41,7 @@ async function run() {
         const userCollection = client.db("AutoPartsBD").collection("user");
         const reviewsCollection = client.db("AutoPartsBD").collection("reviews");
 
-        //Load all Product
+        //Load Products
         app.get('/parts', async (req, res) => {
             const query = {};
             const cursor = partsCollection.find(query)
